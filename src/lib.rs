@@ -1,14 +1,14 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+#![no_std]
+use pinocchio::{entrypoint, nostd_panic_handler, ProgramResult, pubkey::Pubkey, account_info::AccountInfo};
+// pub mod instructions;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+nostd_panic_handler!();
+entrypoint!(process_instruction);
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn process_instruction(
+    _program_id: &Pubkey,
+    _accounts: &[AccountInfo],
+    _data: &[u8],
+) -> ProgramResult {
+    Ok(())
 }
