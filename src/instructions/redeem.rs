@@ -18,7 +18,7 @@ pub struct Redeem<'a> {
 
 pub struct RedeemAccounts<'a> {
     pub redeemer: &'a AccountInfo, //signer
-    pub mint: &'a AccountInfo, //@audit-issue : if left unvalidated, users can burn fake tokens and claim real tokens
+    pub mint: &'a AccountInfo,
     pub mint_ata: &'a AccountInfo, // depositors mint ATA
     pub global_pda: &'a AccountInfo,
     pub token_program: &'a AccountInfo,
