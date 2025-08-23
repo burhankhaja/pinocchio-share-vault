@@ -1,32 +1,9 @@
-// use system Transfer as sol transfer
-// use token Transfer as share transfer
-
-// Architecture
-// burn shares from user's ata ?
-// send tokens from global_pda to redeemer ?? Make sure to use that builder_repo.vault.withdraw_unorthodox
-
-// validations ??
-// no validations needed maybe
-// just check what ?
-/*
-// Invariant : users should not be able to get Real Sol for fake tokens, shares must be burnt 1:1 with the sol withdraw, if user deposits 1 share 1 sol lamport must be given to him
-
-validate if these checks are even needed :
-- signer?  ///// since share burn will prevent that ?
-- global_pda? //// no need since only pda used by program is global_pda so they cant empty anything else
-- ata?
-- validate mint ? YES NEEDED ??? -----> will know when burn op, can users burn fake tokens in exchange for legit shares
-*/
-
-// @audit-issue : MUST VALIDATE MINT , since users can provide fake tokens and get real token in exchange... mention that in natspec .....
-
 use core::mem::size_of;
-use pinocchio_token::instructions::Burn;
-
 use pinocchio::{
     account_info::AccountInfo, program_error::ProgramError, pubkey::find_program_address,
     ProgramResult,
 };
+use pinocchio_token::instructions::Burn;
 
 // ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL
 pub const ASSOCIATED_TOKEN_PROGRAM_ID: [u8; 32] = [
