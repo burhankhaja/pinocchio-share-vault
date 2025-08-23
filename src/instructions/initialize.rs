@@ -43,6 +43,12 @@ impl<'a> TryFrom<&'a [AccountInfo]> for InitializeAccounts<'a> {
             return Err(ProgramError::InvalidSeeds); // dev : later create custom error for this one : InvalidPda ?
         }
 
+        let (mint_key, _) = find_program_address(&[b"mint"], &crate::ID);
+
+        if mint.key().ne(&mint_key) {
+            return Err(ProgramError::InvalidSeeds);
+        }
+
         // dev : for now ignore other checks, note that createAccount will return Error on already created accounts ?
 
         Ok(Self {
