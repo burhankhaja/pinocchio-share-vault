@@ -89,7 +89,8 @@ impl<'a> Initialize<'a> {
             to: self.accounts.mint,
             lamports: mint_rent,
             space: mint_space as u64,
-            owner: &pinocchio_token::ID,
+            owner: self.accounts.token_program.key(),
+            // owner: &pinocchio_token::ID, // dev: what if initializer wants to create either Legacy or Token2022 .... how will pinocchio_token::ID handle that ???
         }
         .invoke()?;
 
