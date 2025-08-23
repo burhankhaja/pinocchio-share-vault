@@ -28,7 +28,7 @@ pub struct Deposit<'a> {
 
 pub struct DepositAccounts<'a> {
     pub depositor: &'a AccountInfo,
-    pub mint: &'a AccountInfo, // validate >> maybe refactor initialize's mint -> seeds
+    pub mint: &'a AccountInfo,
     pub mint_ata: &'a AccountInfo, // depositors mint ATA
     pub global_pda: &'a AccountInfo,
     pub token_program: &'a AccountInfo,
@@ -44,8 +44,8 @@ pub struct DepositInstructionData {
 
 impl<'a> TryFrom<(&'a [AccountInfo], &'a [u8])> for Deposit<'a> {
     type Error = ProgramError;
-    fn try_from((accounts, data): (&'a [AccountInfo], &'a [u8])) -> Result<Self, Self::Error> {
-        let accounts = DepositAccounts::try_from(accounts)?;
+    fn try_from((_accounts, data): (&'a [AccountInfo], &'a [u8])) -> Result<Self, Self::Error> {
+        let accounts = DepositAccounts::try_from(_accounts)?;
         let instruction_data = DepositInstructionData::try_from(data)?;
 
         Ok(Self {
