@@ -22,7 +22,7 @@ pub fn process_instruction(
     _instruction_data: &[u8],
 ) -> ProgramResult {
     match _instruction_data.split_first() {
-        Some((Initialize::DISCRIMINATOR, _data)) => {
+        Some((Initialize::DISCRIMINATOR, _ )) => {
             Initialize::try_from(_accounts)?.process(_program_id)?
         }
         _ => Err(ProgramError::InvalidInstructionData)?,
